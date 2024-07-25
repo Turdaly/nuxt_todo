@@ -23,8 +23,8 @@
         <p class="t-text-sm hover:t-text-custom-light_danger t-cursor-pointer" @click="toggleTodo">Добавить задачу</p>
       </div>
       <div v-if="isTodoOpen" class="t-rounded-lg border t-p-2 ">
-        <v-text-field v-model.trim="newTodo.title" :rules="[rules.required, rules.cyrillic]" @keydown.enter="addTodo(); clearTodo()" clearable label="Название задачи" variant="underlined" class="t-text-sm"></v-text-field>
-        <v-text-field v-model.trim="newTodo.description" :rules="[rules.required, rules.cyrillic]" @keydown.enter="addTodo(); clearTodo()" clearable label="Описание" variant="underlined"></v-text-field>
+        <v-text-field v-model.trim="newTodo.title" :rules="[rules.required]" @keydown.enter="addTodo(); clearTodo()" clearable label="Название задачи" variant="underlined" class="t-text-sm"></v-text-field>
+        <v-text-field v-model.trim="newTodo.description" @keydown.enter="addTodo(); clearTodo()" clearable label="Описание" variant="underlined"></v-text-field>
         <div class="t-flex t-flex-col md:t-flex-row t-gap-2">
           <v-btn class="" @click="toggleTodo(); clearTodo()">
             отмена
@@ -59,13 +59,10 @@
 </template>
 
 <script setup lang="ts">
-const regex = {
-  cyr: /^[\u0400-\u04FF \- a-z A-Z]+$/,
-};
+
 
 const rules = {
   required: (v: any) => !!v || 'Заполните поле',
-  cyrillic: (v: any) => regex.cyr.test(v) || 'Неправильный формат',
 };
 
 </script>
